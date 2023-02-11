@@ -9,7 +9,7 @@ const Header = () => {
       {/* top nav */}
 
       <nav className='flex items-center bg-amazon_blue flex-grow p-4 space-x-4'>
-        <div className='flex- items-center flex-grow sm:flex-grow-0'>
+        <div className='flex items-center flex-grow sm:flex-grow-0'>
           <Image
             src='https://links.papareact.com/f90'
             alt=''

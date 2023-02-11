@@ -3,15 +3,6 @@ import Header from '@/components/Header';
 import Banner from '@/components/Banner';
 import ProductList from '@/components/ProductList';
 
-export async function getServerSideProps(context) {
-  const products = await fetch('https://fakestoreapi.com/products').then((res) => res.json());
-  return {
-    props: {
-      products: products,
-    },
-  };
-}
-
 export default function Home({ products }) {
   const firstProducts = products.slice(0, 4);
   const secondProducts = products.slice(5, products.length);
@@ -35,7 +26,10 @@ export default function Home({ products }) {
       <Header />
       <main className='relative max-w-screen-2xl mx-auto'>
         <Banner />
-        <ProductList products={firstProducts} overlap />
+        <ProductList
+          products={firstProducts}
+          overlap
+        />
         <img
           className='md:col-span-full'
           src={'https://links.papareact.com/dyz'}
@@ -45,4 +39,13 @@ export default function Home({ products }) {
       </main>
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const products = await fetch('https://fakestoreapi.com/products').then((res) => res.json());
+  return {
+    props: {
+      products: products,
+    },
+  };
 }
