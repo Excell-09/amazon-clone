@@ -2,13 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base{
-  body{
-    @apply bg-gray-300
+@layer base {
+  body {
+    @apply bg-gray-300;
   }
 }
-@layer components{
-  .link{
-    @apply cursor-pointer hover:underline
+@layer components {
+  .link {
+    @apply cursor-pointer hover:underline;
   }
+  .button {
+    @apply p-2 bg-gradient-to-b from-yellow-300 to-yellow-400 border border-yellow-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 active:from-yellow-500;
+  }
+}
+
+.scroll-hidden::-webkit-scrollbar {
+  display: none;
 }

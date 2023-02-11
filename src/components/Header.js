@@ -9,7 +9,7 @@ const Header = () => {
       {/* top nav */}
 
       <nav className='flex items-center bg-amazon_blue flex-grow p-4 space-x-4'>
-        <div className='mt-2 flex- items-center flex-grow sm:flex-grow-0'>
+        <div className='flex- items-center flex-grow sm:flex-grow-0'>
           <Image
             src='https://links.papareact.com/f90'
             alt=''
@@ -46,7 +46,7 @@ const Header = () => {
       </nav>
 
       {/* button nav */}
-      <nav className='flex items-center bg-amazon_blue-light text-white space-x-5 px-4 py-1'>
+      <nav className='flex items-center bg-amazon_blue-light text-white space-x-5 px-4 py-1 overflow-x-auto scroll-hidden overflow-hidden whitespace-nowrap'>
         <p className='link flex font-extrabold items-center'>
           {' '}
           <BiMenu className='text-[35px] mr-1' />
