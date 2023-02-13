@@ -31,7 +31,7 @@ export default function Home({ products }) {
           overlap
         />
         <img
-          className='md:col-span-full'
+          className='w-full my-5 mx-auto'
           src={'https://links.papareact.com/dyz'}
           alt='promo'
         />

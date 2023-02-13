@@ -1,6 +1,5 @@
 import React from 'react';
 import Product from './Product';
-import Image from 'next/image';
 
 const ProductList = ({ products, overlap = false }) => {
   return (
