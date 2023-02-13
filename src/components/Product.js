@@ -2,26 +2,33 @@ import React, { useMemo } from 'react';
 import Image from 'next/image';
 import { AiFillStar } from 'react-icons/ai';
 import Currency from 'react-currency-formatter';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '@/slice/cartSlice';
 
 const Product = ({ product }) => {
   const { id, image, title, description, category, rating } = product;
   let { rate } = rating;
   let { price } = product;
+  const dispatch = useDispatch();
 
   const convertedPrice = useMemo(() => price * 15000, [price]);
   rate = Math.round(rate);
 
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
+  };
+
   return (
-    <div className='relative flex flex-col m-4 bg-white z-30 p-10'>
+    <div className='relative flex flex-col m-3 bg-white z-30 p-9'>
       <p className='top-2 right-2 text-sm absolute italic text-gray-400'>{category}</p>
       <Image
         src={image}
         alt='title'
-        width={150}
-        height={150}
+        width={130}
+        height={130}
         className='object-contain block mx-auto aspect-square mb-2'
       />
-      <h4 className='my-3 font-semibold mt-auto line-clamp-2'>{title}</h4>
+      <h4 className='my-3 font-semibold mt-auto line-clamp-1'>{title}</h4>
       <div className='flex items-center'>
         {Array(rate)
           .fill()
@@ -43,7 +50,11 @@ const Product = ({ product }) => {
         />
       </div>
 
-      <button className='button'>Add To Cart</button>
+      <button
+        className='button'
+        onClick={handleAddToCart}>
+        Add To Cart
+      </button>
     </div>
   );
 };
