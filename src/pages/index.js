@@ -2,8 +2,32 @@ import Head from 'next/head';
 import Header from '@/components/Header';
 import Banner from '@/components/Banner';
 import ProductList from '@/components/ProductList';
+import { useEffect, useState } from 'react';
+import Loading from '@/components/Loading';
+import { useRouter } from 'next/router';
 
-export default function Home({ products }) {
+export default function Home() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const getProducts = (fn) => {
+    fetch('https://fakestoreapi.com/products')
+      .then((res) => res.json())
+      .then((res) => {
+        return fn(res);
+      })
+      .catch((e) => router.reload());
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    getProducts((res) => {
+      setProducts(res);
+      setLoading(false);
+    });
+  }, []);
+
   const [firstProducts, secondProducts] = [products.slice(0, 4), products.slice(5, products.length)];
   return (
     <>
@@ -25,26 +49,25 @@ export default function Home({ products }) {
       <Header />
       <main className='relative max-w-screen-2xl mx-auto'>
         <Banner />
-        <ProductList
-          products={firstProducts}
-          overlap
-        />
-        <img
-          className='w-full my-5 mx-auto'
-          src={'https://links.papareact.com/dyz'}
-          alt='promo'
-        />
-        <ProductList products={secondProducts} />
+        {loading ? (
+          <div className='flex items-center justify-center my-7'>
+            <Loading />
+          </div>
+        ) : (
+          <>
+            <ProductList
+              products={firstProducts}
+              overlap
+            />
+            <img
+              className='w-full my-5 mx-auto'
+              src={'https://links.papareact.com/dyz'}
+              alt='promo'
+            />
+            <ProductList products={secondProducts} />
+          </>
+        )}
       </main>
     </>
   );
-}
-
-export async function getServerSideProps(context) {
-  const products = await fetch('https://fakestoreapi.com/products').then((res) => res.json());
-  return {
-    props: {
-      products: products,
-    },
-  };
 }

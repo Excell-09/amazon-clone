@@ -9,6 +9,7 @@ import { addToCart, removeToCart } from '@/slice/cartSlice';
 const ProductsCheckout = ({ item }) => {
   let { rate } = item.rating;
   const convertedPrice = useMemo(() => item.price * 15000, [item.price]);
+
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
@@ -20,7 +21,7 @@ const ProductsCheckout = ({ item }) => {
 
   rate = Math.round(rate);
   return (
-    <div className='grid grid-cols-10 bg-white p-2 px-4'>
+    <div className='grid grid-cols-10 bg-white p-5 px-4'>
       <Image
         src={item.image}
         alt={item.title}
