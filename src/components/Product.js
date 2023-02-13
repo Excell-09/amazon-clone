@@ -2,14 +2,21 @@ import React, { useMemo } from 'react';
 import Image from 'next/image';
 import { AiFillStar } from 'react-icons/ai';
 import Currency from 'react-currency-formatter';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '@/slice/cartSlice';
 
 const Product = ({ product }) => {
   const { id, image, title, description, category, rating } = product;
   let { rate } = rating;
   let { price } = product;
+  const dispatch = useDispatch();
 
   const convertedPrice = useMemo(() => price * 15000, [price]);
   rate = Math.round(rate);
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
+  };
 
   return (
     <div className='relative flex flex-col m-3 bg-white z-30 p-9'>
@@ -43,7 +50,11 @@ const Product = ({ product }) => {
         />
       </div>
 
-      <button className='button'>Add To Cart</button>
+      <button
+        className='button'
+        onClick={handleAddToCart}>
+        Add To Cart
+      </button>
     </div>
   );
 };

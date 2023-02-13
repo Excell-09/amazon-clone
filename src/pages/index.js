@@ -4,8 +4,7 @@ import Banner from '@/components/Banner';
 import ProductList from '@/components/ProductList';
 
 export default function Home({ products }) {
-  const firstProducts = products.slice(0, 4);
-  const secondProducts = products.slice(5, products.length);
+  const [firstProducts, secondProducts] = [products.slice(0, 4), products.slice(5, products.length)];
   return (
     <>
       <Head>
