@@ -57,7 +57,7 @@ const Header = () => {
               Logout
             </div>
           </div>
-          <div className='link'>
+          <div className='link hidden sm:block'>
             <p>Returns</p>
             <p className='font-extrabold'>& Orders</p>
           </div>

@@ -22,7 +22,7 @@ const Product = ({ product }) => {
   };
 
   return (
-    <div className='relative flex flex-col m-3 bg-white z-30 p-9'>
+    <div className='relative flex flex-col m-3 bg-white z-30 p-6 md:p-9'>
       <p className='top-2 right-2 text-sm absolute italic text-gray-400'>{category}</p>
       <Image
         src={image}

@@ -51,7 +51,7 @@ export default function Home() {
       <main className='relative max-w-screen-2xl mx-auto'>
         <Banner />
         {loading ? (
-          <div className='flex items-center justify-center my-7 -mt-52'>
+          <div className='flex items-center justify-center my-7 md:-mt-52'>
             <Loading />
           </div>
         ) : (

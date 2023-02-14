@@ -40,7 +40,7 @@ const checkout = () => {
     <div>
       <Header />
       <main className='lg:flex max-w-screen-2xl mx-auto p-5 lg:space-x-3'>
-        <div className='shadow-md bg-white mb-5'>
+        <div className='shadow-md bg-white mb-5 lg:w-[80%]'>
           <Image
             src='https://links.papareact.com/ikj'
             width={1020}
@@ -70,7 +70,7 @@ const checkout = () => {
           </div>
         </div>
 
-        <div className='flex flex-col bg-white p-3 shadow-md mb-5'>
+        <div className='flex flex-col bg-white p-3 shadow-md mb-5 lg:w-[20%]'>
           <h2 className='flex justify-between'>
             <p>Total :</p>
             <span className='font-bold'> ({items.length}) Items</span>
