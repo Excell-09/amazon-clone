@@ -51,7 +51,7 @@ const Header = () => {
             <p className='font-extrabold'>Account & List</p>
             <div
               onClick={signOut}
-              className={`absolute bg-red-500 font-bold transition-all duration-100 p-2 -bottom-7 rounded-md left-1/2 translate-y-1/2 -translate-x-1/2 ${
+              className={`absolute bg-red-500 font-bold transition-all duration-100 p-2 -bottom-7 rounded-md left-1/2 translate-y-1/2 -translate-x-1/2 text-lg ${
                 !toggleLogOut && 'opacity-0 pointer-events-none'
               }`}>
               Logout

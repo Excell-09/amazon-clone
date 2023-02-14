@@ -29,7 +29,6 @@ export default function Home() {
     });
   }, []);
 
-
   const [firstProducts, secondProducts] = [products.slice(0, 4), products.slice(5, products.length)];
   return (
     <>
@@ -52,7 +51,7 @@ export default function Home() {
       <main className='relative max-w-screen-2xl mx-auto'>
         <Banner />
         {loading ? (
-          <div className='flex items-center justify-center my-7'>
+          <div className='flex items-center justify-center my-7 -mt-52'>
             <Loading />
           </div>
         ) : (

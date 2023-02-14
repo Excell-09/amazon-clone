@@ -4,14 +4,37 @@ import Image from 'next/image';
 import { useSelector } from 'react-redux';
 import { selectItem, selectTotalItem } from '@/slice/cartSlice';
 import ProductsCheckout from '@/components/ProductsCheckout';
-import Currency from 'react-currency-formatter';
 import { signIn, useSession } from 'next-auth/react';
+import { loadStripe } from '@stripe/stripe-js';
+import axios from 'axios';
+
+const stripePromise = loadStripe(process.env.stripe_public_key);
 
 const checkout = () => {
   const items = useSelector(selectItem);
   const { data: session } = useSession();
   const totalItem = useSelector(selectTotalItem);
-  const convertedPrice = useMemo(() => totalItem * 15000, [totalItem]);
+  let convertedPrice = useMemo(() => totalItem * 15000, [totalItem]);
+  convertedPrice = convertedPrice.toLocaleString('id', {
+    useGrouping: true,
+    maximumFractionDigits: 3,
+  });
+  const createCheckout = async () => {
+    const stripe = await stripePromise;
+
+    const checkoutSession = await axios.post('/api/create-checkout-session', {
+      items,
+      email: session.user.email,
+    });
+
+    const result = await stripe.redirectToCheckout({
+      sessionId: checkoutSession.data.id,
+    });
+
+    if (result.error) {
+      alert(result.error.message);
+    }
+  };
 
   return (
     <div>
@@ -49,24 +72,21 @@ const checkout = () => {
 
         <div className='flex flex-col bg-white p-3 shadow-md mb-5'>
           <h2 className='flex justify-between'>
-            Total
+            <p>Total :</p>
             <span className='font-bold'> ({items.length}) Items</span>
           </h2>
 
           <h2 className='flex justify-between whitespace-normal'>
-            subtotal :
-            <span className='font-bold text-red-500'>
-              <Currency
-                quantity={convertedPrice}
-                currency={'idr'}
-              />
-            </span>
+            <p>subtotal : </p>
+            <span className='font-bold text-red-500'>Rp {convertedPrice}</span>
           </h2>
 
           <button
-            className={`button w-full ${!session && 'from-gray-300 to-gray-500 border-gray-200 text-gray-300'} mt-3`}
-            onClick={session ? () => {} : signIn}>
-            {session ? 'Proceed To Checkout' : 'Sign In For Checkout'}
+            role={'link'}
+            className={`button w-full ${!session && 'from-gray-300 to-gray-500 border-gray-200 text-gray-300'} mt-3 disabled:cursor-not-allowed`}
+            onClick={session ? createCheckout : signIn}
+            disabled={items.length < 1}>
+            {session ? 'Process To Checkout' : 'Sign In For Checkout'}
           </button>
         </div>
       </main>

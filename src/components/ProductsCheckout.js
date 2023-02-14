@@ -2,14 +2,17 @@ import Image from 'next/image';
 import React, { useMemo } from 'react';
 import { AiFillStar } from 'react-icons/ai';
 import { BsPlus, BsTrash } from 'react-icons/bs';
-import Currency from 'react-currency-formatter';
 import { useDispatch } from 'react-redux';
 import { addToCart, removeToCart } from '@/slice/cartSlice';
 
 const ProductsCheckout = ({ item }) => {
   let { rate } = item.rating;
-  const convertedPrice = useMemo(() => item.price * 15000, [item.price]);
-
+  
+  let convertedPrice = useMemo(() => item.price * 15000, [item.price]);
+  convertedPrice = convertedPrice.toLocaleString('id', {
+    useGrouping: true,
+    maximumFractionDigits: 3,
+  });
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
@@ -44,10 +47,7 @@ const ProductsCheckout = ({ item }) => {
             ))}
         </div>
         <p className='text-md my-2 line-clamp-2 sm:line-clamp-3'>{item.description}</p>
-        <Currency
-          quantity={convertedPrice}
-          currency={'IDR'}
-        />
+        Rp {convertedPrice}
       </div>
       <div className='flex flex-col m-auto space-y-3 justify-self-end justify-between'>
         <BsPlus

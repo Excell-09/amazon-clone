@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import Image from 'next/image';
 import { AiFillStar } from 'react-icons/ai';
-import Currency from 'react-currency-formatter';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '@/slice/cartSlice';
 
@@ -11,7 +10,11 @@ const Product = ({ product }) => {
   let { price } = product;
   const dispatch = useDispatch();
 
-  const convertedPrice = useMemo(() => price * 15000, [price]);
+  let convertedPrice = useMemo(() => price * 15000, [price]);
+  convertedPrice = convertedPrice.toLocaleString('id', {
+    useGrouping: true,
+    maximumFractionDigits: 3,
+  });
   rate = Math.round(rate);
 
   const handleAddToCart = () => {
@@ -43,12 +46,7 @@ const Product = ({ product }) => {
       </div>
 
       <p className='my-2 line-clamp-2'>{description}</p>
-      <div className='mb-5 text-red-500 font-semibold text-xl'>
-        <Currency
-          quantity={convertedPrice}
-          currency='IDR'
-        />
-      </div>
+      <div className='mb-5 text-red-500 font-semibold text-xl'>Rp {convertedPrice}</div>
 
       <button
         className='button'
