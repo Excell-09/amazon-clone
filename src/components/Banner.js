@@ -1,6 +1,7 @@
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { Carousel1, Carousel2, Carousel3 } from '@/assets/image';
 
 const Banner = () => {
   return (
@@ -17,21 +18,21 @@ const Banner = () => {
         <div>
           <img
             loading='lazy'
-            src='http://links.papareact.com/gi1'
+            src={Carousel1.src}
             alt='banner'
           />
         </div>
         <div>
           <img
             loading='lazy'
-            src='http://links.papareact.com/6ff'
+            src={Carousel2.src}
             alt='banner'
           />
         </div>
         <div>
           <img
             loading='lazy'
-            src='http://links.papareact.com/7ma'
+            src={Carousel3.src}
             alt='banner'
           />
         </div>

@@ -7,13 +7,13 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { selectItem } from '@/slice/cartSlice';
+import { Logo } from '@/assets/image';
 
 const Header = () => {
   const { data: session } = useSession();
   const [toggleLogOut, setToggleLogOut] = useState(false);
   const router = useRouter();
   const items = useSelector(selectItem);
-
   return (
     <header>
       {/* top nav */}
@@ -24,7 +24,7 @@ const Header = () => {
             onClick={() => {
               router.push('/');
             }}
-            src='https://links.papareact.com/f90'
+            src={Logo}
             alt=''
             width={100}
             height={100}

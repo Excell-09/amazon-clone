@@ -5,6 +5,7 @@ import ProductList from '@/components/ProductList';
 import { useEffect, useState } from 'react';
 import Loading from '@/components/Loading';
 import { useRouter } from 'next/router';
+import { Primebanner } from '@/assets/image';
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -17,7 +18,7 @@ export default function Home() {
       .then((res) => {
         return fn(res);
       })
-      .catch((e) => router.reload());
+      .catch(() => router.reload());
   };
 
   useEffect(() => {
@@ -27,6 +28,7 @@ export default function Home() {
       setLoading(false);
     });
   }, []);
+
 
   const [firstProducts, secondProducts] = [products.slice(0, 4), products.slice(5, products.length)];
   return (
@@ -61,7 +63,7 @@ export default function Home() {
             />
             <img
               className='w-full my-5 mx-auto'
-              src={'https://links.papareact.com/dyz'}
+              src={Primebanner.src}
               alt='promo'
             />
             <ProductList products={secondProducts} />

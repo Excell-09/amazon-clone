@@ -15,8 +15,8 @@ const ProductsCheckout = ({ item }) => {
   const handleAddToCart = () => {
     dispatch(addToCart(item));
   };
-  const handleRemoveToCart = (id) => {
-    dispatch(removeToCart({ id }));
+  const handleRemoveToCart = () => {
+    dispatch(removeToCart({ id: item.id }));
   };
 
   rate = Math.round(rate);
