@@ -19,7 +19,7 @@ const success = () => {
             galley of type and scrambled it to make a type specimen book.
           </p>
           <button
-            onClick={() => router.push('/orders')}
+            onClick={() => router.push('/')}
             className='button mt-8 w-full'>
             Continue Shopping
           </button>
